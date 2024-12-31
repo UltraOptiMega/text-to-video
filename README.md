@@ -18,10 +18,7 @@ Text to Video(文本生成图片)
 
 生成:
 
-<video width="320" height="240" controls>
-    <source src="demo/4ae53065f7704ee8aa79c53448e21de8.mp4" type="video/mp4">
-</video>
-
+![demo](demo/4ae53065f7704ee8aa79c53448e21de8.mp4)
 
 
 ## 配置使用
