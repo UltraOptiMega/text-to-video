@@ -1,0 +1,11 @@
+<div style="width: 580px; padding: 20px;">
+    <h3>你好,</h3>
+    <p></p>
+    <p>欢迎注册{{ site_name }}! 请使用下述用户名登录我们的站点.<small>(如非本人操作,请忽略该邮件)</small></p>
+    <p></p>
+    <p>用户名: {{ username }}</p>
+    <p></p>
+    <small style="color: #868e96;">
+        点击<a href="{{ url_for('auth.login', _external=True) }}">前往登录</a>.
+    </small>
+</div>

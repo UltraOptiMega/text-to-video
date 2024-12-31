@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+{% from 'bootstrap5/table.html' import render_table %}
+
+{% block title %}
+settings
+{% endblock %}
+
+{% block content %}
+
+{{ render_table(
+    settings,
+    titles=(('name', '参数名称'), ('descr', '描述'), ('created_at', '创建时间')),
+    show_actions=True,
+    actions_title='操作',
+    edit_url=('index.edit_setting', [('id_', ':id')]),
+    responsive=True, responsive_class='table-responsive-sm',
+)}}
+
+<script>
+setTimeout(function(){ window.location.reload() },20000);
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "aigc-video"
+version = "0.1.0"
+description = ""
+authors = ["bingtel <bingtel@qq.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^3.1.0"
+gunicorn = "^23.0.0"
+gevent = "^24.11.1"
+bootstrap-flask = "^2.4.1"
+flask-login = "^0.6.3"
+flask-wtf = "^1.2.2"
+moviepy = "^2.1.1"
+requests = "^2.32.3"
+selenium = "^4.27.1"
+diskcache = "^5.6.3"
+volcengine = "^1.0.166"
+
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+{% from 'bootstrap5/table.html' import render_table %}
+
+{% block title %}
+视频列表
+{% endblock %}
+
+{% block content %}
+
+{{ render_table(
+    videos,
+    titles=(('id', 'ID'), ('name', '标题'), ('content', '内容'), ('created_at', '创建时间')),
+    show_actions=True,
+    actions_title='操作',
+    view_url=('index.download_video', [('id_', ':id')]),
+    delete_url=('index.delete_video', [('id_', ':id')]),
+    responsive=True, responsive_class='table-responsive-sm',
+)}}
+
+<script>
+setTimeout(function(){ window.location.reload() }, 20000);
+</script>
+{% endblock %}
