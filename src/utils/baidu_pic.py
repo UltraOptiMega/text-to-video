@@ -1,19 +1,28 @@
 from contextlib import contextmanager
 from urllib.request import urlretrieve
 import uuid
+import os
+from traceback import format_exc
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import WebDriverException
+
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+
+from flask import current_app
 
 
 class Browser:
     def __init__(self):
         options = Options()
         options.add_argument('--headless')
-        self.browser = webdriver.Chrome(options=options)
+        options.add_argument('--no-sandbox')
+        self.browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     def close(self):
         self.browser.quit()

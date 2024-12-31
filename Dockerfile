@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM --platform=linux/x86_64  python:3.9-alpine3.17
 
 # Don't run as root
 RUN adduser -D appuser && \
@@ -7,7 +7,7 @@ RUN adduser -D appuser && \
     chown appuser:appuser /home/appuser/text-to-video && \ 
     touch /tmp/gunicorn.log && \
     chown appuser:appuser /tmp/gunicorn.log && \
-    apk add build-base ffmpeg chromium chromium-chromedriver && \
+    apk update && apk add build-base ffmpeg chromium chromium-chromedriver libc6-compat  gcompat && \
     pip install --upgrade pip setuptools wheel && \
     # Use wget instead of curl since curl is external package in alpine
     # https://python-poetry.org/docs/#installation
@@ -19,7 +19,6 @@ USER appuser
 
 # Add Poetry to PATH
 ENV PATH="/home/appuser/.poetry/bin:${PATH}"
-ENV CHROME_BIN=/usr/bin/chromium-browser CHROME_PATH=/usr/lib/chromium/
 
 WORKDIR /home/appuser/text-to-video
 
@@ -31,4 +30,4 @@ RUN poetry install --no-root
 EXPOSE 8000
 
 # Run your Flask application using Gunicorn server for production
-CMD ["poetry", "run", "gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "--preload", "--log-file", "/tmp/gunicorn.log", "src:create_app()"]
+CMD ["poetry", "run", "gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "--preload", "--log-file", "/tmp/gunicorn.log", "--timeout", "180", "src:create_app()"]

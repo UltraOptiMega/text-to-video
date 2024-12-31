@@ -18,6 +18,7 @@ requests = "^2.32.3"
 selenium = "^4.27.1"
 diskcache = "^5.6.3"
 volcengine = "^1.0.166"
+webdriver-manager = "^4.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
