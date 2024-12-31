@@ -31,7 +31,7 @@ def generate_video(form, task_id):
 
     video_dst = f'{constants.VIDEO_ROOT}/{task_id}'
     if not os.path.exists(video_dst):
-        os.mkdir(video_dst)
+        os.makedirs(video_dst)
 
     clips = []
 

@@ -36,8 +36,9 @@ Text to Video(文本生成图片)
 ### 源码部署
 
 1.	本地安装[poetry](https://poetry.pythonlang.cn/docs/)
-2. 	git clone 本项目
-3. 	进入项目后，执行: 
+2. 本地安装好ffmpeg
+3. 	git clone 本项目
+4. 	进入项目后，执行: 
 
 > poetry shell
 
@@ -48,9 +49,28 @@ Text to Video(文本生成图片)
 
 浏览器访问:   http://localhost:8000/
 
+### docker部署[推荐]
+1. git clone本项目
+2. 进入项目目录,执行:
+
+>  docker build -t text-to-video:demo  .
+
+> docker run -p 8000:8000  -it  text-to-video:demo
+
+
+浏览器访问:   http://localhost:8000/
+
+
 
 ## 技术思路
 1. 将用户输入的段落，切分成短句
-2. 针对每个短句，使用selenium，爬取一张百度图片；然后调用字节火山引擎接口，生成音频，合成一个VideoClip
+2. 针对每个短句，使用selenium(避免IP被封)，爬取一张百度图片；然后调用字节火山引擎接口，生成音频，合成一个VideoClip
 3. 把所有短句的VideoClip，合成一个Video
+4. 数据使用sqlite存储，方便单机迁移和部署
+
+
+## 技术支持
+微信扫描二维码，备注: `github`
+
+![](./demo/self_qrcode.png)
 

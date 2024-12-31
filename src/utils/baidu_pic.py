@@ -12,7 +12,7 @@ from selenium.webdriver.chrome.options import Options
 class Browser:
     def __init__(self):
         options = Options()
-        options.add_argument('--headless=new')
+        options.add_argument('--headless')
         self.browser = webdriver.Chrome(options=options)
 
     def close(self):
