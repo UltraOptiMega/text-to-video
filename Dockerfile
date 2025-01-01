@@ -1,4 +1,4 @@
-FROM --platform=linux/x86_64  python:3.9-alpine3.17
+FROM python:3.9-alpine3.17
 
 # Don't run as root
 RUN adduser -D appuser && \
@@ -7,7 +7,7 @@ RUN adduser -D appuser && \
     chown appuser:appuser /home/appuser/text-to-video && \ 
     touch /tmp/gunicorn.log && \
     chown appuser:appuser /tmp/gunicorn.log && \
-    apk update && apk add build-base ffmpeg chromium chromium-chromedriver libc6-compat  gcompat && \
+    apk update && apk add build-base ffmpeg chromium chromedriver libc6-compat  gcompat && \
     pip install --upgrade pip setuptools wheel && \
     # Use wget instead of curl since curl is external package in alpine
     # https://python-poetry.org/docs/#installation
