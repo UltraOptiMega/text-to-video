@@ -3,6 +3,7 @@ import os
 import json
 from traceback import format_exc
 
+from loguru import logger
 from flask import Blueprint, request, flash, redirect, url_for, send_file, current_app
 
 from . import forms, constants, biz
@@ -22,7 +23,7 @@ def index():
                 biz.generate_video(form, f'{uuid.uuid4().hex}')
                 flash('视频创建成功')
             except Exception as e:
-                current_app.logger.error(format_exc())
+                logger.error(format_exc())
                 flash(str(e), 'error')
                 return redirect(url_for('.index'))
             return redirect(url_for('.list_videos'))

@@ -3,6 +3,7 @@ from collections import OrderedDict
 import json
 from urllib.parse import urlencode, quote
 
+from loguru import logger
 from flask import current_app
 
 from volcengine.auth.SignerV4 import SignerV4
@@ -54,6 +55,6 @@ def get_token(access_key, access_secret, tts_appkey, token_version='volc-auth-v1
     }
 
     x = requests.post(url, json=payload, headers=headers)
-    current_app.logger.info('get token response, status_code: %s, text: %s', x.status_code, x.text)
+    logger.info('get token response, status_code: {}, text: {}', x.status_code, x.text)
     resp = x.json()
     return resp['token']

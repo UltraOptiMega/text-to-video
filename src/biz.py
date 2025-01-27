@@ -3,6 +3,8 @@ import os
 import json
 import shutil
 
+from loguru import logger
+
 from moviepy import (
     AudioFileClip,
     ImageClip,
@@ -90,29 +92,29 @@ def generate_audio(content, speaker, dst):
     token = get_volcengine_tts_token()
     params = get_tts_params()
     namespace = 'TTS'
-    current_app.logger.info('start to generate audio, text: %s', content)
+    logger.info('start to generate audio, text: {}', content)
     url = f'https://sami.bytedance.com/api/v1/invoke?version=v4&token={token}&appkey={params["volcengine.tts.appkey"]}&namespace={namespace}'
     payload = {'text': content, 'speaker': speaker, 'audio_config': {
         'format': 'wav',
         'sample_rate': 16000
     }}
     x = requests.post(url, json={'payload': json.dumps(payload)})
-    current_app.logger.info(
-        'audio response, input: %s, response_text: %s, status_code: %s', content, x.text, x.status_code)
+    logger.info(
+        'audio response, input: {}, response_text: {}, status_code: {}', content, x.text, x.status_code)
     resp_json = x.json()
     payload = json.loads(resp_json['payload'])
     stream = resp_json['data']
     binary_data = base64.b64decode(stream)
     with open(dst, 'wb') as f:
         f.write(binary_data)
-    current_app.logger.info('audio generated, text: %s, dst: %s', content, dst)
+    logger.info('audio generated, text: {}, dst: {}', content, dst)
 
 
 def generate_images(sents, dst):
     image_paths = []
     with get_browser() as browser:
         for s in sents:
-            current_app.logger.info('start get image for text: %s', s)
+            logger.info('start get image for text: {}', s)
             path = browser.download_pics(s, dst)
             image_paths.append(path[0])
     return image_paths
