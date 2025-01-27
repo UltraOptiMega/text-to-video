@@ -6,6 +6,7 @@ from wtforms import (
     SubmitField,
     TextAreaField,
     IntegerField,
+    BooleanField,
 )
 from wtforms.validators import (
     DataRequired,
@@ -18,6 +19,7 @@ class AddTextToVideoForm(FlaskForm):
     content = TextAreaField(
         '视频文案', render_kw={"rows": 20, "placeholder": "最好一行一句"},
         validators=[DataRequired(), Length(1, 10000)])
+    split_by_line = BooleanField('按行分句', validators=[])
     speaker = StringField(
         '音色(根据需要,从 https://www.volcengine.com/docs/6489/93478 获取)',
         render_kw={'placeholder': '默认值zh_male_qinqie'})

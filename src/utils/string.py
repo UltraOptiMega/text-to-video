@@ -5,7 +5,9 @@ import time
 from flask import render_template
 
 
-def cut_sent(para):
+def cut_sent(split_by_line, para):
+    if split_by_line:
+        return [e.strip() for e in para.split('\n') if e.strip()]
     para = re.sub('([,，;:、。！？\?])([^”’])', r"\1\n\2", para)  # 单字符断句符
     para = re.sub('(\.{6})([^”’])', r"\1\n\2", para)  # 英文省略号
     para = re.sub('(\…{2})([^”’])', r"\1\n\2", para)  # 中文省略号

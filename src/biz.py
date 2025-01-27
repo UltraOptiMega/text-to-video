@@ -25,7 +25,7 @@ from .utils import (
 
 
 def generate_video(form, task_id):
-    sents = cut_sent(form.content.data)
+    sents = cut_sent(form.split_by_line, form.content.data)
     if not sents:
         raise AppError('未能切分出有效的句子')
 
